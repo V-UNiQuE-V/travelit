@@ -8,12 +8,28 @@ class BottomNavBar extends StatefulWidget {
 }
 
 class _BottomNavBarState extends State<BottomNavBar> {
+
+  final appScreens = [
+    const Center(child: Text("Home")),
+    const Center(child: Text("Search")),
+    const Center(child: Text("Tickets")),
+    const Center(child: Text("Profile")),
+  ];
+  //change active icons: Usage Of setState
+  int _selectedIndex = 0;
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text("My tickets"), centerTitle: true),
-      body: Center(child: Text("Ticket Info")),
+      body: appScreens[_selectedIndex],
       bottomNavigationBar: BottomNavigationBar(
+        onTap: _onItemTapped,
         selectedItemColor: Colors.blueGrey,
         unselectedItemColor: const Color(0xFF356400),
         showSelectedLabels: false,
@@ -23,13 +39,13 @@ class _BottomNavBarState extends State<BottomNavBar> {
             activeIcon: Icon(Icons.home),
             label: "Home",
           ),
-          BottomNavigationBarItem(icon: Icon(Icons.search), label: "Search"),
+          BottomNavigationBarItem(icon: Icon(Icons.search_outlined), activeIcon: Icon(Icons.search), label: "Search"),
           BottomNavigationBarItem(
-            icon: Icon(Icons.airplane_ticket_outlined),
+            icon: Icon(Icons.airplane_ticket_outlined), activeIcon: Icon(Icons.airplane_ticket),
             label: "Tickets",
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.person_outline_outlined),
+            icon: Icon(Icons.person_outline_outlined), activeIcon: Icon(Icons.person),
             label: "Profile",
           ),
         ],
