@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ticket_app/res/app_styles.dart';
+import 'package:ticket_app/res/media.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -41,7 +42,10 @@ class _HomeScreenState extends State<HomeScreen> {
                         //Styling a vector
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(10),
-                          color: Colors.cyan
+                          image: DecorationImage(
+                            //ImageProvider - diff. classes in flutter eg: NetworkImage - loads image from the Internet
+                              image: AssetImage(AppMedia.logo) //Tells the code where images are located
+                          )
                         )
                     )
                   ],
