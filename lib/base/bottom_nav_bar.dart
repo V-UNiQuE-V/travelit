@@ -15,6 +15,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
     const Center(child: Text("Tickets")),
     const Center(child: Text("Profile")),
   ];
+  //change our index for BottomNavBar
   //change active icons: Usage Of setState
   int _selectedIndex = 0;
   void _onItemTapped(int index) {
@@ -29,6 +30,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
       appBar: AppBar(title: Text("My tickets"), centerTitle: true),
       body: appScreens[_selectedIndex],
       bottomNavigationBar: BottomNavigationBar(
+        currentIndex: _selectedIndex,
         onTap: _onItemTapped,
         selectedItemColor: Colors.blueGrey,
         unselectedItemColor: const Color(0xFF356400),
