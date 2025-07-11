@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ticket_app/res/app_styles.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -29,26 +30,20 @@ class _HomeScreenState extends State<HomeScreen> {
                       //Horizontal Axis for Column
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(
-                          "Good Morning",
-                          style: TextStyle(
-                            fontSize: 17,
-                            fontWeight: FontWeight.w500,
-                          ),
-                        ),
+                        Text("Good Morning", style: AppStyles.headLineStyle3),
                         //Create some space between them
                         SizedBox(height: 5),
-                        Text(
-                          "Book Tickets",
-                          style: TextStyle(
-                            fontSize: 26,
-                            fontWeight: FontWeight.w500,
-                            color: Color(0xFF3b3b3b),
-                          ),
-                        ),
+                        Text("Book Tickets", style: AppStyles.headLineStyle1),
                       ],
                     ),
-                    Container(color: Colors.cyan, width: 100, height: 70),
+                    Container(
+                        width: 50, height: 50,
+                        //Styling a vector
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          color: Colors.cyan
+                        )
+                    )
                   ],
                 ),
                 Row(
