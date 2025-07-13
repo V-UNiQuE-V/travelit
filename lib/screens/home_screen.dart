@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:ticket_app/res/app_styles.dart';
-import 'package:ticket_app/res/media.dart';
 
+import '../res/media.dart';
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
@@ -14,9 +14,11 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     //Widgets: Column, ListView, ListView.builder, Expand
     return Scaffold(
+      backgroundColor: AppStyles.bgColor,
       body: ListView(
         //Scrollable Effect
         children: [
+          const SizedBox(height: 40),
           //To put things on Top of each other use Column Widget, Empty space is also a widget
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -42,17 +44,30 @@ class _HomeScreenState extends State<HomeScreen> {
                         //Styling a vector
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(10),
+                          // color: Colors.cyan,
                           image: DecorationImage(
                             //ImageProvider - diff. classes in flutter eg: NetworkImage - loads image from the Internet
-                              image: AssetImage(AppMedia.logo) //Tells the code where images are located
+                              image: AssetImage(AppMedia.logo)//Tells the code where images are located
                           )
                         )
                     )
                   ],
                 ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [Text("Search Icon"), Text("Empty Space")],
+                const SizedBox(height: 25),
+                Container(
+                  padding: EdgeInsets.symmetric(horizontal: 12, vertical: 12),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                    color: const Color(0xFFF4F6FD),
+                  ),
+                  child: Row(
+                    // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    //Decoration: Search Bar
+                    children: [
+                      Icon(Icons.search_outlined, color: Color(0xFFbfc205)),
+                      Text("Search"),
+                    ]
+                  ),
                 ),
               ],
             ),
