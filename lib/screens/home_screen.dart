@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ticket_app/base/widgets/app_double_text.dart';
+import 'package:ticket_app/base/widgets/ticket_view.dart';
 import '../base/res/app_styles.dart';
 import '../base/res/media.dart';
 class HomeScreen extends StatefulWidget {
@@ -25,7 +26,7 @@ class _HomeScreenState extends State<HomeScreen> {
             // color: Colors.grey,
             child: Column(
               //Widgets are List inside Widgets. Widgets are represented by children
-              children: [
+              children: [ //List of Widgets
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -71,8 +72,9 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
                 const SizedBox(height: 40),
                 //Other Section
-                AppDoubleText(bigText: 'Upcoming Flights', smallText: 'View all'), //Passing the text to the widget
-
+                AppDoubleText(bigText: 'Upcoming  Flights', smallText: 'View all'), //Passing the text to the widget
+                SizedBox(height: 20),
+                TicketView()
 
                 // const SizedBox(height: 40),
                 // AppDoubleText(bigText: 'Upcoming Meetings', smallText: 'View all')
