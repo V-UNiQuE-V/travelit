@@ -11,7 +11,8 @@ import 'app_layoutbuilder_widget.dart';
 
 
 class TicketView extends StatelessWidget {
-  const TicketView({super.key});
+  final Map<String, dynamic> ticket;
+  const TicketView({super.key, required this.ticket});
 
   @override
   Widget build(BuildContext context) {
@@ -41,9 +42,10 @@ class TicketView extends StatelessWidget {
                   Row(
                     // mainAxisAlignment: MainAxisAlignment.spaceBetween, //For complex alignment doesn't work for individual texts
                     children: [
-                      TextStyleThird(text: "NYC"),
+                      TextStyleThird(text: ticket["from"]["code"]),
                       Expanded(child: Container()), //Expanded - Proportionally puts lots of items i.e. space between each child
                       BigDot(),
+                      //ticket flying icon
                       Expanded(child: Stack(children: [
                         /* How to get Dynamic Space:
                         * The dash (which we want in-between) are widgets (Any kind of thing as pixel)
@@ -66,7 +68,7 @@ class TicketView extends StatelessWidget {
                       ],)), //Acc. to the no. of spaces, the no. of dots will vary & Overlapping - for Overlapping we use a special widget called as Stack Widget
                       BigDot(),
                       Expanded(child: Container()),
-                      TextStyleThird(text: "LDN"),
+                      TextStyleThird(text: ticket["to"]["code"]),
                     ],
                   ),
                   SizedBox(height: 3),
@@ -76,14 +78,14 @@ class TicketView extends StatelessWidget {
                     children: [
                       SizedBox(
                         width: 100,
-                        child: TextStyleFourth(text: "New-York"),
+                        child: TextStyleFourth(text: ticket["from"]["name"]),
                       ),
                       Expanded(child: Container()), //Expanded - Proportionally puts lots of items i.e. space between each child
-                      TextStyleFourth(text: "8H 30M"),
+                      TextStyleFourth(text: ticket["flying_time"]),
                       Expanded(child: Container()),
                       SizedBox(
                         width: 100,
-                        child: TextStyleFourth(text: "London", align: TextAlign.end),
+                        child: TextStyleFourth(text: ticket["to"]["name"], align: TextAlign.end),
                       ),
                     ],
                   ),
@@ -118,41 +120,9 @@ class TicketView extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      AppColumnTextLayout(topText: "1 MAY", bottomText: "Date"),
-                      AppColumnTextLayout(topText: "08:00 AM", bottomText: "Departure Time", alignment: CrossAxisAlignment.center),
-                      AppColumnTextLayout(topText: "23", bottomText: "Number", alignment: CrossAxisAlignment.end)
-
-                      // Expanded(child: Container()), //Expanded - Proportionally puts lots of items i.e. space between each child
-                  //     Text(
-                  //       "08:00 AM",
-                  //       style: AppStyles.headLineStyle3.copyWith(color: Colors.white),
-                  //     ),
-                  //     Expanded(child: Container()),
-                  //     Text(
-                  //       "23",
-                  //       style: AppStyles.headLineStyle3.copyWith(color: Colors.white),
-                  //     ),
-                  //   ],
-                  // ),
-                  // SizedBox(height: 3),
-                  // //Show departure & destination names with time
-                  // Row(
-                  //   // mainAxisAlignment: MainAxisAlignment.spaceBetween, //For complex alignment doesn't work for individual texts
-                  //   children: [
-                  //     Text(
-                  //       "Date",
-                  //       style: AppStyles.headLineStyle3.copyWith(color: Colors.white, fontSize: 16),
-                  //     ),
-                  //     Expanded(child: Container()), //Expanded - Proportionally puts lots of items i.e. space between each child
-                  //     Text(
-                  //       "Departure Time",
-                  //       style: AppStyles.headLineStyle3.copyWith(color: Colors.white, fontSize: 16),
-                  //     ),
-                  //     Expanded(child: Container()),
-                  //     Text(
-                  //       "Number",
-                  //       style: AppStyles.headLineStyle3.copyWith(color: Colors.white, fontSize: 16),
-                  //     ),
+                      AppColumnTextLayout(topText: ticket["date"], bottomText: "Date"),
+                      AppColumnTextLayout(topText: ticket["departure_time"], bottomText: "Departure Time", alignment: CrossAxisAlignment.center),
+                      AppColumnTextLayout(topText: ticket["number"].toString(), bottomText: "Number", alignment: CrossAxisAlignment.end)
                     ],
                   ),
                 ],

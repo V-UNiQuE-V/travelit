@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
+import 'package:ticket_app/base/utils/all_json.dart';
 import 'package:ticket_app/base/widgets/app_double_text.dart';
 import 'package:ticket_app/base/widgets/ticket_view.dart';
 import '../base/res/app_styles.dart';
@@ -70,11 +72,22 @@ class _HomeScreenState extends State<HomeScreen> {
                     ]
                   ),
                 ),
+
                 const SizedBox(height: 40),
                 //Other Section
                 AppDoubleText(bigText: 'Upcoming  Flights', smallText: 'View all'), //Passing the text to the widget
                 SizedBox(height: 20),
-                TicketView()
+                SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: Row(
+                      // children: [
+                      //   TicketView(),
+                      //   TicketView()
+                      // ]
+                    children: ticketList.map((singleTicket) => TicketView(ticket: singleTicket)).toList() //no. of lists to take which are maps who returns TicketViews, children requires a list so we convert map to a list.
+                  //Each of the map is passed to TicketView for dynamic info in a loop
+                  )
+                )
 
                 // const SizedBox(height: 40),
                 // AppDoubleText(bigText: 'Upcoming Meetings', smallText: 'View all')
