@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:ticket_app/res/app_styles.dart';
-
-import '../res/media.dart';
+import 'package:ticket_app/base/widgets/app_double_text.dart';
+import '../base/res/app_styles.dart';
+import '../base/res/media.dart';
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
@@ -69,9 +69,16 @@ class _HomeScreenState extends State<HomeScreen> {
                     ]
                   ),
                 ),
+                const SizedBox(height: 40),
+                //Other Section
+                AppDoubleText(bigText: 'Upcoming Flights', smallText: 'View all'), //Passing the text to the widget
+
+
+                // const SizedBox(height: 40),
+                // AppDoubleText(bigText: 'Upcoming Meetings', smallText: 'View all')
               ],
             ),
-          ),
+          )
         ],
       ),
     );
