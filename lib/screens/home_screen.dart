@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:ticket_app/base/utils/all_json.dart';
 import 'package:ticket_app/base/widgets/app_double_text.dart';
 import 'package:ticket_app/base/widgets/ticket_view.dart';
@@ -75,7 +74,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
                 const SizedBox(height: 40),
                 //Other Section
-                AppDoubleText(bigText: 'Upcoming  Flights', smallText: 'View all'), //Passing the text to the widget
+                AppDoubleText(bigText: 'Upcoming  Flights', smallText: 'View all', func: () => Navigator.pushNamed(context, "/all_tickets")), //Passing the text to the widget
                 SizedBox(height: 20),
                 SingleChildScrollView(
                   scrollDirection: Axis.horizontal,
@@ -84,13 +83,13 @@ class _HomeScreenState extends State<HomeScreen> {
                       //   TicketView(),
                       //   TicketView()
                       // ]
-                    children: ticketList.map((singleTicket) => TicketView(ticket: singleTicket)).toList() //no. of lists to take which are maps who returns TicketViews, children requires a list so we convert map to a list.
+                    children: ticketList.take(2).map((singleTicket) => TicketView(ticket: singleTicket)).toList() //no. of lists to take which are maps who returns TicketViews, children requires a list so we convert map to a list.
                   //Each of the map is passed to TicketView for dynamic info in a loop
                   )
-                )
+                ),
 
-                // const SizedBox(height: 40),
-                // AppDoubleText(bigText: 'Upcoming Meetings', smallText: 'View all')
+                const SizedBox(height: 40),
+                AppDoubleText(bigText: 'Hotels', smallText: 'View all', func: () => {})
               ],
             ),
           )
