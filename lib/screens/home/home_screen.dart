@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:ticket_app/base/utils/all_json.dart';
 import 'package:ticket_app/base/widgets/app_double_text.dart';
 import 'package:ticket_app/base/widgets/ticket_view.dart';
-import '../base/res/app_styles.dart';
-import '../base/res/media.dart';
+import 'package:ticket_app/screens/home/widgets/hotel.dart';
+
+import '../../base/res/app_styles.dart';
+import '../../base/res/media.dart';
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
@@ -26,6 +28,7 @@ class _HomeScreenState extends State<HomeScreen> {
             padding: const EdgeInsets.symmetric(horizontal: 20),
             // color: Colors.grey,
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               //Widgets are List inside Widgets. Widgets are represented by children
               children: [ //List of Widgets
                 Row(
@@ -89,7 +92,14 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
 
                 const SizedBox(height: 40),
-                AppDoubleText(bigText: 'Hotels', smallText: 'View all', func: () => {})
+                AppDoubleText(bigText: 'Hotels', smallText: 'View all', func: () => Navigator.pushNamed(context, "/all_hotels")),
+                SizedBox(height: 20),
+                SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: Row(
+                    children: hotelList.map((singleHotel) => Hotel(hotel : singleHotel)).toList()
+                  )
+                  )
               ],
             ),
           )
