@@ -36,10 +36,10 @@ class AppTabs extends StatelessWidget {
       padding: EdgeInsets.symmetric(vertical: 7),
       width: size.width * .44,
       decoration: BoxDecoration(
+        color: tabColor==false?Colors.white:Colors.transparent,
         borderRadius: tabBorder == false
             ? BorderRadius.horizontal(left: Radius.circular(50))
             : BorderRadius.horizontal(right: Radius.circular(50)),
-        color: tabColor==false?Colors.white:Colors.transparent,
       ),
       child: Center(child: Text(tabText)),
     );
