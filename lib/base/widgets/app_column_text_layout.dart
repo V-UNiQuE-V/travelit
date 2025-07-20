@@ -17,7 +17,7 @@ class AppColumnTextLayout extends StatelessWidget {
       children: [
         TextStyleThird(text: topText, isColor: isColor),
         SizedBox(height: 3),
-        TextStyleFourth(text: bottomText, isColor: isColor)
+        TextStyleFourth(text: bottomText, isColor: isColor),
       ],
     );
   }
