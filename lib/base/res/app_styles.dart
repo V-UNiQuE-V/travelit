@@ -31,9 +31,9 @@ class AppStyles {
   static TextStyle headLineStyle2 = TextStyle(
     fontSize: 21,
     fontWeight: FontWeight.bold,
-    color: textColor,
+    color: textColor, // due to textColor property which is dynamic so it makes texStyle dynamic not static.
   );
-  static TextStyle headLineStyle3 = TextStyle(
+  static TextStyle headLineStyle3 = const TextStyle( // As this isn't dynamic thus we can put const as it's a static widget.
     fontSize: 17,
     fontWeight: FontWeight.w500,
   );

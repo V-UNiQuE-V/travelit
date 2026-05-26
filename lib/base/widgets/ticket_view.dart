@@ -11,21 +11,21 @@ import 'app_layoutbuilder_widget.dart';
 
 class TicketView extends StatelessWidget {
   final Map<String, dynamic> ticket;
-  final bool wholeScreen;
-  final bool? isColor;
+  final bool wholeScreen; // view all
+  final bool? isColor; // ticket screen
   const TicketView({super.key, required this.ticket, this.wholeScreen = false, this.isColor});
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size; //size is dynamic
+    final size = MediaQuery.of(context).size; //size (Whole Screen) is dynamic
 
     return SizedBox(
       width: size.width * 0.85,
-      height: 179,
+      height: 180,
       child: Container(
         // margin: EdgeInsets.only(right: 16),
         margin: EdgeInsets.only(right: wholeScreen==true?0:16),
-        child: Column(
+        child: Column( // takes required space only.
           children: [
             //First Row
             Container(
@@ -47,8 +47,9 @@ class TicketView extends StatelessWidget {
                       TextStyleThird(text: ticket["from"]["code"], isColor: isColor),
                       Expanded(child: Container()), //Expanded - Proportionally puts lots of items i.e. space between each child
                       BigDot(isColor: isColor),
+
                       //ticket flying icon
-                      Expanded(child: Stack(children: [
+                      Expanded(child: Stack(children: [ // For Overlapping Property we use Special Widget Called as Stack. And. as there are overlapping widgets so stack has childrens.
                         /* How to get Dynamic Space:
                         * The dash (which we want in-between) are widgets (Any kind of thing as pixel)
                         * available space / random no. - will be given to List.generate()
@@ -67,18 +68,22 @@ class TicketView extends StatelessWidget {
 
                         Center(child: Transform.rotate(angle: 1.57, //angle is in radians
                         child: Icon(Icons.local_airport_rounded, color: isColor==null? Colors.white : AppStyles.planeSecondColor)))
-                      ],)), //Acc. to the no. of spaces, the no. of dots will vary & Overlapping - for Overlapping we use a special widget called as Stack Widget
+                      ],)),
+                      //Acc. to the no. of spaces, the no. of dots will vary & Overlapping - for Overlapping we use a special widget called as Stack Widget
+
                       BigDot(isColor: isColor),
                       Expanded(child: Container()),
                       TextStyleThird(text: ticket["to"]["code"], isColor: isColor),
                     ],
                   ),
+
                   SizedBox(height: 3),
+
                   //Show departure & destination names with time
                   Row(
                     // mainAxisAlignment: MainAxisAlignment.spaceBetween, //For complex alignment doesn't work for individual texts
                     children: [
-                      SizedBox(
+                      SizedBox( // SizedBox - helps to give fixed width to first & last element such that it expands evenly and centered.
                         width: 100,
                         child: TextStyleFourth(text: ticket["from"]["name"], isColor: isColor),
                       ),
@@ -87,13 +92,14 @@ class TicketView extends StatelessWidget {
                       Expanded(child: Container()),
                       SizedBox(
                         width: 100,
-                        child: TextStyleFourth(text: ticket["to"]["name"], align: TextAlign.end, isColor: isColor),
+                        child: TextStyleFourth(text: ticket["to"]["name"], align: TextAlign.end, isColor: isColor), // aligned to start by default so we provided it as end.
                       ),
                     ],
                   ),
                 ],
               ),
             ),
+
             //Dashed Line
             Container(
               // height: 20, 
@@ -106,6 +112,7 @@ class TicketView extends StatelessWidget {
                 ],
               ),
             ),
+
             //Second Row
             Container(
               padding: EdgeInsets.all(16),
@@ -121,7 +128,7 @@ class TicketView extends StatelessWidget {
                 children: [
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
+                    children: [ // Here all texts are very diff. so can't give fixed size (As they could overlap each other) to first & last element using SizedBox. So,we use our designed layout based on column elements.
                       AppColumnTextLayout(topText: ticket["date"], bottomText: "Date", isColor: isColor),
                       AppColumnTextLayout(topText: ticket["departure_time"], bottomText: "Departure Time", alignment: CrossAxisAlignment.center, isColor: isColor),
                       AppColumnTextLayout(topText: ticket["number"].toString(), bottomText: "Number", alignment: CrossAxisAlignment.end, isColor: isColor)

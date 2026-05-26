@@ -5,7 +5,7 @@ class AppLayoutBuilderWidget extends StatelessWidget {
   final double width;
   final bool? isColor;
   
-  const AppLayoutBuilderWidget({super.key, required this.randomDivider, this.width=3, this.isColor});
+  const AppLayoutBuilderWidget({super.key, required this.randomDivider, this.width=3, this.isColor}); //required has to be passed. If we don't want required assign an default value.
 
   @override
   Widget build(BuildContext context) {
@@ -14,7 +14,7 @@ class AppLayoutBuilderWidget extends StatelessWidget {
       return Flex(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         direction: Axis.horizontal,
-        children: List.generate((constraints.constrainWidth()/randomDivider).floor(), (index) => SizedBox(
+        children: List.generate((constraints.constrainWidth()/randomDivider).floor(), (index) => SizedBox( // how many widgets to be generated and then generating it's interface using SizedBox.
           width: width, height: 1, child: DecoratedBox(decoration: BoxDecoration(color: isColor==null? Colors.white : Colors.grey.shade300)),
         )),
 

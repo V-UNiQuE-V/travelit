@@ -3,6 +3,8 @@ import 'package:ticket_app/screens/search/search_screen.dart';
 
 import '../screens/home/home_screen.dart';
 import '../screens/ticket/ticket_screen.dart';
+
+
 class BottomNavBar extends StatefulWidget {
   const BottomNavBar({super.key});
 
@@ -23,7 +25,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
   //change active icons: Usage Of setState
   int _selectedIndex = 0;
   void _onItemTapped(int index) {
-    setState(() {
+    setState(() { // helps to update the UI
       _selectedIndex = index;
     });
   }
@@ -32,10 +34,13 @@ class _BottomNavBarState extends State<BottomNavBar> {
   Widget build(BuildContext context) {
     return Scaffold(
       // appBar: AppBar(title: Text("My tickets"), centerTitle: true),
-      body: appScreens[_selectedIndex],
+      body: appScreens[_selectedIndex], // According to the item selected state of body is changing
       bottomNavigationBar: BottomNavigationBar(
-        currentIndex: _selectedIndex,
+        currentIndex: _selectedIndex, // helps in changing the active icon status.
         onTap: _onItemTapped,
+        /* when the bottom nav icons are clicked onTap helps to identify which icon was clicked and passes the index of selected
+           icon's index to our private defined function onItemTapped.
+         */
         selectedItemColor: Colors.blueGrey,
         unselectedItemColor: const Color(0xFF356400),
         showSelectedLabels: false,

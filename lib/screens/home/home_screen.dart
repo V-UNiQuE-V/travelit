@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ticket_app/base/utils/all_json.dart';
+import 'package:ticket_app/base/utils/app_routes.dart';
 import 'package:ticket_app/base/widgets/app_double_text.dart';
 import 'package:ticket_app/base/widgets/ticket_view.dart';
 import 'package:ticket_app/screens/home/widgets/hotel.dart';
@@ -44,7 +45,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         Text("Book Tickets", style: AppStyles.headLineStyle1),
                       ],
                     ),
-                    Container(
+                    Container( // logo
                         width: 50, height: 50,
                         //Styling a vector
                         decoration: BoxDecoration(
@@ -52,7 +53,8 @@ class _HomeScreenState extends State<HomeScreen> {
                           // color: Colors.cyan,
                           image: DecorationImage(
                             //ImageProvider - diff. classes in flutter eg: NetworkImage - loads image from the Internet
-                              image: AssetImage(AppMedia.logo)//Tells the code where images are located
+                            // no need to create instance like (AppMedia media = AppMedia -> media.logo) as logo is a static variable which helps in accessing it directly using the class itself.
+                              image: AssetImage(AppMedia.logo)//AssetImage - Tells the code where images are located in Local Storage
                           )
                         )
                     )
@@ -76,10 +78,13 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
 
                 const SizedBox(height: 40),
+
                 //Other Section
-                AppDoubleText(bigText: 'Upcoming  Flights', smallText: 'View all', func: () => Navigator.pushNamed(context, "/all_tickets")), //Passing the text to the widget
+
+                // Reusable Widget
+                AppDoubleText(bigText: 'Upcoming  Flights', smallText: 'View all', func: () => Navigator.pushNamed(context, AppRoutes.allTickets)), //Passing the text to the widget
                 SizedBox(height: 20),
-                SingleChildScrollView(
+                SingleChildScrollView( // scrollable view
                   scrollDirection: Axis.horizontal,
                   child: Row(
                       // children: [
@@ -92,7 +97,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
 
                 const SizedBox(height: 40),
-                AppDoubleText(bigText: 'Hotels', smallText: 'View all', func: () => Navigator.pushNamed(context, "/all_hotels")),
+                AppDoubleText(bigText: 'Hotels', smallText: 'View all', func: () => Navigator.pushNamed(context, AppRoutes.allHotels)),
                 SizedBox(height: 20),
                 SingleChildScrollView(
                   scrollDirection: Axis.horizontal,

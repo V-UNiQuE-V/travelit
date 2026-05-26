@@ -2,10 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:ticket_app/base/bottom_nav_bar.dart';
 import 'package:ticket_app/screens/home/all_tickets.dart';
 
-void main() {
-  runApp(const MyApp());
+void main() { // main() : Entry point for Dart
+  runApp(const MyApp()); // runApp() : Entry point for Flutter Framework
 }
 
+/* Stateless widget is an abstract class whose constructor requires key attribute thus the child class MyApp passes the value
+ through it's constructor
+ */
+
+/*
+Every class is a Widget when it extends a Stateless or a Stateful widget.
+In stateless widget value changes aren't redrawn on UI.
+In stateful widget value changes are reflected on UI.
+ */
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 

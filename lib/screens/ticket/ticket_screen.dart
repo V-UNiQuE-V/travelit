@@ -120,6 +120,7 @@ class TicketScreen extends StatelessWidget {
                 ),
               ),
               SizedBox(height: 1),
+              //bottom of the ticket detail section (BarCode)
               Container(
                 padding: EdgeInsets.symmetric(vertical: 20),
                 margin: EdgeInsets.symmetric(horizontal: 16),
@@ -132,7 +133,7 @@ class TicketScreen extends StatelessWidget {
                 ),
                 child: Container(
                   padding: EdgeInsets.symmetric(horizontal: 20),
-                  child: ClipRRect(
+                  child: ClipRRect( // For rectangle border
                     borderRadius: BorderRadius.circular(15),
                     child: BarcodeWidget(
                       height: 70,
@@ -140,7 +141,7 @@ class TicketScreen extends StatelessWidget {
                       data: 'https://www.dbestech.com',
                       drawText: false,
                       color: AppStyles.textColor,
-                      width: double.infinity,
+                      width: double.infinity, // takes all the available space
                     ),
                   ),
                 ),

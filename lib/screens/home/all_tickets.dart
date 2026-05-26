@@ -8,7 +8,7 @@ class AllTickets extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
+      appBar: AppBar( // Used to go back & forth (provides back icon)
         title: Center(child: Text("All Tickets")),
       ),
       body: ListView(
