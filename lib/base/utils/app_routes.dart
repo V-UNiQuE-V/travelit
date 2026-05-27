@@ -4,5 +4,6 @@ class AppRoutes {
   static String allTickets = "/all_tickets";
   static String allHotels = "/all_hotels";
   static String ticketScreen = "/ticket_screen";
+  static String hotelDetails = "/hotel_details";
 }
 

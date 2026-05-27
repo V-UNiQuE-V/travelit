@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ticket_app/base/res/app_styles.dart';
-import 'package:ticket_app/screens/home/widgets/hotel.dart';
+import 'package:ticket_app/base/utils/app_routes.dart';
 
 import '../../base/utils/all_json.dart';
 
@@ -28,7 +28,7 @@ class AllHotels extends StatelessWidget {
               ),
           itemBuilder: (context, index) {
                 var singleHotel = hotelList[index];
-                return HotelGridView(hotel: singleHotel);
+                return HotelGridView(hotel: singleHotel, index:index);
           }
           ),
         ),
@@ -39,14 +39,15 @@ class AllHotels extends StatelessWidget {
 
 class HotelGridView extends StatelessWidget {
   final Map<String, dynamic> hotel;
-  const HotelGridView({super.key, required this.hotel});
+  final int index;
+  const HotelGridView({super.key, required this.hotel, required this.index});
 
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     return GestureDetector(
       onTap: () {
-
+        Navigator.pushNamed(context, AppRoutes.hotelDetails, arguments: {"index" : index});
       },
       child: Container(
         margin: EdgeInsets.only
