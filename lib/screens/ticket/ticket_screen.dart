@@ -10,8 +10,27 @@ import 'package:ticket_app/screens/ticket/widgets/ticket_positioned_circle.dart'
 
 import '../../base/widgets/app_column_text_layout.dart';
 
-class TicketScreen extends StatelessWidget {
+class TicketScreen extends StatefulWidget {
   const TicketScreen({super.key});
+
+  @override
+  State<TicketScreen> createState() => _TicketScreenState();
+}
+
+class _TicketScreenState extends State<TicketScreen> {
+
+  late int ticketIndex = 0;
+
+  @override
+  void didChangeDependencies() { // Used whenever moved from One Screen to another screen and at the same time args or objects are passed which is to be used in another class.
+    if(ModalRoute.of(context)!.settings.arguments != null) {
+      // print("Value is null");
+      var args = ModalRoute.of(context)!.settings.arguments as Map;
+      // print("Passed Index: ${args["index"]}");
+      ticketIndex = args["index"];
+    }
+    super.didChangeDependencies();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +54,7 @@ class TicketScreen extends StatelessWidget {
               Container(
                 margin: EdgeInsets.only(bottom: 0),
                 padding: EdgeInsets.only(left: 16),
-                child: TicketView(ticket: ticketList[0], isColor: true),
+                child: TicketView(ticket: ticketList[ticketIndex], isColor: true),
               ),
               // SizedBox(height: 1),
               //Trick
@@ -155,7 +174,7 @@ class TicketScreen extends StatelessWidget {
               Container(
                 margin: EdgeInsets.only(bottom: 0),
                 padding: EdgeInsets.only(left: 16),
-                child: TicketView(ticket: ticketList[0]),
+                child: TicketView(ticket: ticketList[ticketIndex]),
               ),
             ],
           ),

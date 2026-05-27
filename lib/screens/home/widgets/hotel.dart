@@ -9,7 +9,8 @@ class Hotel extends StatelessWidget {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     return Container(
-      margin: EdgeInsets.only(right: 16),
+      margin: EdgeInsets.only
+        (right: 16),
       padding: EdgeInsets.all(13),
       width: size.width * 0.6,
       height: 350,
