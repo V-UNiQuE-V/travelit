@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:ticket_app/base/res/app_styles.dart';
 import 'package:ticket_app/base/utils/all_json.dart';
+import 'package:ticket_app/base/utils/app_routes.dart';
 import 'package:ticket_app/base/widgets/ticket_view.dart';
 
 class AllTickets extends StatelessWidget {
@@ -9,17 +11,25 @@ class AllTickets extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar( // Used to go back & forth (provides back icon)
-        title: Center(child: Text("All Tickets")),
+        title: Text("All Tickets"),
       ),
       body: ListView(
         children: [
           SingleChildScrollView(
             scrollDirection: Axis.vertical,
             child: Column(
-              children: ticketList.map((singleTicket) => Container(
-                  margin: EdgeInsets.only(bottom: 15),
-                  child: TicketView(ticket: singleTicket, wholeScreen: true,
-                  ))).toList()
+              children: ticketList.map((singleTicket) => GestureDetector(
+                onTap: () {
+                  var index = ticketList.indexOf(singleTicket);
+                  // print("Tapped on ticket $index");
+
+                  Navigator.pushNamed(context, AppRoutes.ticketScreen, arguments: {"index" : index});
+                },
+                child: Container(
+                    margin: EdgeInsets.only(bottom: 15),
+                    child: TicketView(ticket: singleTicket, wholeScreen: true,
+                    )),
+              )).toList()
             ),
           )
         ],

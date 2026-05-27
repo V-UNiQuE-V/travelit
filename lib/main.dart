@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:ticket_app/base/bottom_nav_bar.dart';
 import 'package:ticket_app/screens/home/all_tickets.dart';
+import 'package:ticket_app/screens/ticket/ticket_screen.dart';
+
+import 'base/utils/app_routes.dart';
 
 void main() { // main() : Entry point for Dart
   runApp(const MyApp()); // runApp() : Entry point for Flutter Framework
@@ -25,8 +28,9 @@ class MyApp extends StatelessWidget {
       // home: BottomNavBar(),
       routes: {
         //data pre-processing
-        "/": (context) => BottomNavBar(),
-        "/all_tickets" : (context) => AllTickets()
+        AppRoutes.homePage : (context) => BottomNavBar(),
+        AppRoutes.allTickets : (context) => AllTickets(),
+        AppRoutes.ticketScreen : (context) => TicketScreen()
       }
     );
   }
