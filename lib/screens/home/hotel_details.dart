@@ -67,17 +67,16 @@ class _HotelDetailsState extends State<HotelDetails> {
                   Positioned(
                       bottom: 30,
                       right: 30,
-                      child: Container(
-                          padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                      child: Container(padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                           color: Colors.black.withOpacity(0.5),
                           child: Text(
-                              hotelList[index]["place"],
-                              style: TextStyle(
+                                hotelList[index]["place"],
+                                style: TextStyle(
                                 color: Colors.white,
                                 fontSize: 24,
                                 shadows: [
                                   Shadow(
-                                    blurRadius: 10,
+                                    blurRadius: 10, // Adds blur to the shadowColor
                                     color: AppStyles.primaryColor,
                                     offset: Offset(2, 2)
 
@@ -94,7 +93,10 @@ class _HotelDetailsState extends State<HotelDetails> {
           SliverList(delegate: SliverChildListDelegate(
             [
               Padding(padding: EdgeInsets.all(16.0),
-              child: Text("In grammar, an article is any of a small set of words or affixes (such as a, an, and the in English) used with nouns to limit or give definiteness to the application. The category of articles constitutes a part of speech. These words represent a specific object, depending on the situation, but a is less specific than the. Articles combine with nouns to form noun phrases, and typically specify the grammatical definiteness of the noun phrase. In English, the and a (rendered as an when followed by a vowel sound) are the definite and indefinite articles respectively. Articles in many other languages also carry additional grammatical information such as gender, number, and case. Articles are part of a broader category called determiners, which also include demonstratives, possessive determiners, and quantifiers. In linguistic interlinear glossing, articles are abbreviated as art."),),
+              child: ExpandedTextWidget(
+                  text: hotelList[index]["detail"]
+                )
+              ),
               Padding(padding: EdgeInsets.all(16.0),
                child: Text("More Images",
                  style: TextStyle(
@@ -106,15 +108,16 @@ class _HotelDetailsState extends State<HotelDetails> {
                 height: 200,
                 child: ListView.builder(
                     scrollDirection: Axis.horizontal,
-                    itemCount: 10,
-                    itemBuilder: (context, index) {
-                  return Container(
-                    margin: EdgeInsets.all(16),
-                    color: Colors.red,
-                    child: Image.network(
-                        "https://placehold.co/200x200.png"
-                    ),
-                  );
+                    itemCount: hotelList[index]["images"].length,
+                    itemBuilder: (context, imageIndex) {
+                      print("index: ${hotelList[index]["images"][imageIndex]}");
+                      return Container(
+                        margin: EdgeInsets.all(16),
+                        color: Colors.red,
+                        child: Image.asset(
+                            "assets/images/${hotelList[index]["images"][imageIndex]}"
+                        ),
+                      );
                 }),
               )
             ]
@@ -122,5 +125,52 @@ class _HotelDetailsState extends State<HotelDetails> {
         ],
       ),
     );
+  }
+}
+
+
+class ExpandedTextWidget extends StatefulWidget {
+  const ExpandedTextWidget({super.key, required this.text});
+
+  final String text;
+
+  @override
+  State<ExpandedTextWidget> createState() => _ExpandedTextWidgetState();
+}
+
+class _ExpandedTextWidgetState extends State<ExpandedTextWidget> {
+
+  bool isExpanded = false;
+
+  _toggleExpansion() {
+    setState(() {
+      isExpanded = !isExpanded;
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+
+    var textWidget = Text(
+        widget.text,
+      maxLines: isExpanded?null:9,
+      overflow: isExpanded?TextOverflow.visible:TextOverflow.ellipsis,
+    );
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        textWidget,
+        GestureDetector(
+          onTap: () {
+            _toggleExpansion();
+          },
+          child: Text(isExpanded?"Less":"More", style: AppStyles.textStyle.copyWith(
+            color: AppStyles.primaryColor
+          )),
+        )
+      ],
+    );
+
   }
 }

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:ticket_app/base/res/app_styles.dart';
 import 'package:ticket_app/base/utils/all_json.dart';
 import 'package:ticket_app/base/utils/app_routes.dart';
 import 'package:ticket_app/base/widgets/ticket_view.dart';
