@@ -7,6 +7,7 @@ import 'package:ticket_app/screens/home/widgets/hotel.dart';
 
 import '../../base/res/app_styles.dart';
 import '../../base/res/media.dart';
+import '../../base/widgets/heading_text.dart';
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
@@ -42,7 +43,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         Text("Good Morning", style: AppStyles.headLineStyle3),
                         //Create some space between them
                         SizedBox(height: 5),
-                        Text("Book Tickets", style: AppStyles.headLineStyle1),
+                        HeadingText(text: "Book Tickets", isColor: false),
                       ],
                     ),
                     Container( // logo
