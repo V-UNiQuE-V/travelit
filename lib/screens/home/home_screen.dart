@@ -91,7 +91,12 @@ class _HomeScreenState extends State<HomeScreen> {
                       //   TicketView(),
                       //   TicketView()
                       // ]
-                    children: ticketList.take(2).map((singleTicket) => TicketView(ticket: singleTicket)).toList() //no. of lists to take which are maps who returns TicketViews, children requires a list so we convert map to a list.
+                    children: ticketList.take(2).map((singleTicket) => GestureDetector(
+                        onTap: () {
+                          var index = ticketList.indexOf(singleTicket);
+                          Navigator.pushNamed(context, AppRoutes.ticketScreen, arguments: {"index" : index});
+                        },
+                        child: TicketView(ticket: singleTicket))).toList() //no. of lists to take which are maps who returns TicketViews, children requires a list so we convert map to a list.
                   //Each of the map is passed to TicketView for dynamic info in a loop
                   )
                 ),
@@ -102,7 +107,12 @@ class _HomeScreenState extends State<HomeScreen> {
                 SingleChildScrollView(
                   scrollDirection: Axis.horizontal,
                   child: Row(
-                    children: hotelList.map((singleHotel) => Hotel(hotel : singleHotel)).toList()
+                    children: hotelList.map((singleHotel) => GestureDetector(
+                        onTap: () {
+                          var index = hotelList.indexOf(singleHotel);
+                          Navigator.pushNamed(context, AppRoutes.hotelDetails, arguments: {"index" : index});
+                        },
+                        child: Hotel(hotel : singleHotel))).toList()
                   )
                   )
               ],
