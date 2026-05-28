@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:ticket_app/base/res/app_styles.dart';
 import 'package:ticket_app/base/utils/all_json.dart';
+import 'package:ticket_app/controller/text_expansion_controller.dart';
 
 class HotelDetails extends StatefulWidget {
   const HotelDetails({super.key});
@@ -14,7 +16,7 @@ class _HotelDetailsState extends State<HotelDetails> {
 
   @override
   void didChangeDependencies() {
-    if(ModalRoute.of(context)!.settings.arguments != null) {
+    if (ModalRoute.of(context)!.settings.arguments != null) {
       var args = ModalRoute.of(context)!.settings.arguments as Map;
       index = args["index"];
     }
@@ -35,7 +37,8 @@ class _HotelDetailsState extends State<HotelDetails> {
             // bg color for arrow btn
             leading: Padding(
               padding: const EdgeInsets.all(8.0),
-              child: GestureDetector( // whenever leading property is used we have to explicitly mention back btn
+              child: GestureDetector(
+                // whenever leading property is used we have to explicitly mention back btn
                 onTap: () {
                   Navigator.pop(context);
                 },
@@ -44,10 +47,7 @@ class _HotelDetailsState extends State<HotelDetails> {
                     shape: BoxShape.circle,
                     color: AppStyles.primaryColor,
                   ),
-                  child: Icon(
-                    Icons.arrow_back,
-                    color: Colors.white,
-                  ),
+                  child: Icon(Icons.arrow_back, color: Colors.white),
                 ),
               ),
             ),
@@ -62,78 +62,80 @@ class _HotelDetailsState extends State<HotelDetails> {
                     child: Image.asset(
                       "assets/images/${hotelList[index]["image"]}",
                       fit: BoxFit.cover,
-                    )
+                    ),
                   ),
                   Positioned(
-                      bottom: 30,
-                      right: 30,
-                      child: Container(padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-                          color: Colors.black.withOpacity(0.5),
-                          child: Text(
-                                hotelList[index]["place"],
-                                style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 24,
-                                shadows: [
-                                  Shadow(
-                                    blurRadius: 10, // Adds blur to the shadowColor
-                                    color: AppStyles.primaryColor,
-                                    offset: Offset(2, 2)
-
-                                  )
-                                ]
-                              ),
-                          )
-                      )
-                  )
-                ]
+                    bottom: 30,
+                    right: 30,
+                    child: Container(
+                      padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                      color: Colors.black.withOpacity(0.5),
+                      child: Text(
+                        hotelList[index]["place"],
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 24,
+                          shadows: [
+                            Shadow(
+                              blurRadius: 10, // Adds blur to the shadowColor
+                              color: AppStyles.primaryColor,
+                              offset: Offset(2, 2),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
               ),
             ), //flexible (AppBar) as scrolled
           ),
-          SliverList(delegate: SliverChildListDelegate(
-            [
-              Padding(padding: EdgeInsets.all(16.0),
-              child: ExpandedTextWidget(
-                  text: hotelList[index]["detail"]
-                )
+          SliverList(
+            delegate: SliverChildListDelegate([
+              Padding(
+                padding: EdgeInsets.all(16.0),
+                child: ExpandedTextWidget(text: hotelList[index]["detail"]),
               ),
-              Padding(padding: EdgeInsets.all(16.0),
-               child: Text("More Images",
-                 style: TextStyle(
-                   fontSize: 20.0,
-                   fontWeight: FontWeight.bold,
-                 ),
-               )),
+              Padding(
+                padding: EdgeInsets.all(16.0),
+                child: Text(
+                  "More Images",
+                  style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
+                ),
+              ),
               Container(
                 height: 200,
                 child: ListView.builder(
-                    scrollDirection: Axis.horizontal,
-                    itemCount: hotelList[index]["images"].length,
-                    itemBuilder: (context, imageIndex) {
-                      print("index: ${hotelList[index]["images"][imageIndex]}");
-                      return Container(
-                        margin: EdgeInsets.all(16),
-                        color: Colors.red,
-                        child: Image.asset(
-                            "assets/images/${hotelList[index]["images"][imageIndex]}"
-                        ),
-                      );
-                }),
-              )
-            ]
-          ))
+                  scrollDirection: Axis.horizontal,
+                  itemCount: hotelList[index]["images"].length,
+                  itemBuilder: (context, imageIndex) {
+                    print("index: ${hotelList[index]["images"][imageIndex]}");
+                    return Container(
+                      margin: EdgeInsets.all(16),
+                      color: Colors.red,
+                      child: Image.asset(
+                        "assets/images/${hotelList[index]["images"][imageIndex]}",
+                      ),
+                    );
+                  },
+                ),
+              ),
+            ]),
+          ),
         ],
       ),
     );
   }
 }
 
-
-class ExpandedTextWidget extends StatefulWidget {
-  const ExpandedTextWidget({super.key, required this.text});
+class ExpandedTextWidget extends StatelessWidget {
+  ExpandedTextWidget({super.key, required this.text});
 
   final String text;
 
+  final TextExpansionController controller = Get.put(TextExpansionController());
+
+  /*
   @override
   State<ExpandedTextWidget> createState() => _ExpandedTextWidgetState();
 }
@@ -147,30 +149,37 @@ class _ExpandedTextWidgetState extends State<ExpandedTextWidget> {
       isExpanded = !isExpanded;
     });
   }
+  */
 
   @override
   Widget build(BuildContext context) {
+    return Obx(() {
+      var textWidget = Text(
+        // widget.text, // widget used if class is stateful.
+        text,
+        maxLines: controller.isExpanded.value ? null : 9,
+        overflow: controller.isExpanded.value
+            ? TextOverflow.visible
+            : TextOverflow.ellipsis,
+      );
 
-    var textWidget = Text(
-        widget.text,
-      maxLines: isExpanded?null:9,
-      overflow: isExpanded?TextOverflow.visible:TextOverflow.ellipsis,
-    );
-
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        textWidget,
-        GestureDetector(
-          onTap: () {
-            _toggleExpansion();
-          },
-          child: Text(isExpanded?"Less":"More", style: AppStyles.textStyle.copyWith(
-            color: AppStyles.primaryColor
-          )),
-        )
-      ],
-    );
-
+      return Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          textWidget,
+          GestureDetector(
+            onTap: () {
+              controller.toggleExpansion();
+            },
+            child: Text(
+              controller.isExpanded.value ? "Less" : "More",
+              style: AppStyles.textStyle.copyWith(
+                color: AppStyles.primaryColor,
+              ),
+            ),
+          ),
+        ],
+      );
+    });
   }
 }

@@ -36,6 +36,7 @@ dependencies:
   cupertino_icons: ^1.0.8
   barcode_widget: ^2.0.4
   fluentui_system_icons: ^1.1.258
+  get: ^4.7.3
 dev_dependencies:
   flutter_test:
     sdk: flutter
